@@ -1,4 +1,4 @@
-package com.kamishhayha.coursek.resources;
+package com.kamishhayha.coursek.controllers;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import com.kamishhayha.coursek.services.ProductService;
 
 @RestController
 @RequestMapping(value = "/products")
-public class ProductResource {
+public class ProductController {
 
 	@Autowired
 	private ProductService service;
@@ -27,7 +27,7 @@ public class ProductResource {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Product> findById(@PathVariable Long id){
-		Product user = service.findByid(id);
-		return ResponseEntity.ok().body(user);
+		Product product = service.findByid(id);
+		return ResponseEntity.ok().body(product);
 	}
 }

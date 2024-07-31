@@ -1,4 +1,4 @@
-package com.kamishhayha.coursek.resources;
+package com.kamishhayha.coursek.controllers;
 
 import java.util.List;
 
@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kamishhayha.coursek.entities.Category;
-import com.kamishhayha.coursek.services.CategoryService;
+import com.kamishhayha.coursek.entities.Order;
+import com.kamishhayha.coursek.services.OrderService;
 
 @RestController
-@RequestMapping(value = "/categories")
-public class CategoryResource {
+@RequestMapping(value = "/orders")
+public class OrderController {
 
 	@Autowired
-	private CategoryService service;
+	private OrderService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Category>> findAll(){
-		List<Category> list = service.findAll();
+	public ResponseEntity<List<Order>> findAll(){
+		List<Order> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Category> findById(@PathVariable Long id){
-		Category user = service.findByid(id);
-		return ResponseEntity.ok().body(user);
+	public ResponseEntity<Order> findById(@PathVariable Long id){
+		Order order = service.findByid(id);
+		return ResponseEntity.ok().body(order);
 	}
 }
