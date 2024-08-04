@@ -6,7 +6,7 @@
 
 ## Sobre o Projeto
 
-Este projeto é um serviço web feito durante o curso do DevSuperior.
+Este projeto é um serviço web feito durante o curso do **DevSuperior**.
 
 ## Tecnologias Utilizadas
 
@@ -17,6 +17,11 @@ Este projeto é um serviço web feito durante o curso do DevSuperior.
   - Maven
   - H2 Database
   - PostgreSQL
+    
+- **Outros:**
+  - Postman
+  - Eclipse
+  - Github
 
 ## Instalação
 
@@ -31,13 +36,11 @@ Este projeto é um serviço web feito durante o curso do DevSuperior.
    
    ```
    git clone https://github.com/TojiHayha/workshop-springboot-jpa.git
+   
    cd nome-repositorio
 
-**Licença**
-Sob a licença MIT. Veja LICENSE para mais informações.
+### Autor
 
-Autor
-
-**TojiHayha** 
+TojiHayha
 
 Link do Projeto: https://github.com/TojiHayha/workshop-springboot-jpa
