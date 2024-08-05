@@ -29,7 +29,7 @@ public class UserService {
 		return user.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 
-	public User insert(User user) {
+	public User create(User user) {
 		return repository.save(user);
 	}
 
