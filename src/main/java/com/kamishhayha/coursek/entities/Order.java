@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kamishhayha.coursek.entities.enums.OrderStatus;
 
 import jakarta.persistence.CascadeType;
@@ -81,7 +82,8 @@ public class Order implements Serializable {
 			this.orderStatus = orderStatus.getCode();
 		}
 	}
-
+	
+	@JsonIgnore
 	public User getClient() {
 		return client;
 	}
