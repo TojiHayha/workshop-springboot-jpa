@@ -83,7 +83,6 @@ public class Order implements Serializable {
 		}
 	}
 	
-	@JsonIgnore
 	public User getClient() {
 		return client;
 	}

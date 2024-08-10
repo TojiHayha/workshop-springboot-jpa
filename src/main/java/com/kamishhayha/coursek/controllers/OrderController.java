@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.kamishhayha.coursek.entities.Order;
-import com.kamishhayha.coursek.entities.User;
+import com.kamishhayha.coursek.entities.OrderItem;
 import com.kamishhayha.coursek.services.OrderService;
 
 @RestController
@@ -34,7 +35,7 @@ public class OrderController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Order> findById(@PathVariable Long id){
-		Order order = service.findByid(id);
+		Order order = service.findById(id);
 		return ResponseEntity.ok().body(order);
 	}
 	
@@ -59,4 +60,19 @@ public class OrderController {
 		order = service.update(id, order);
 		return ResponseEntity.ok().body(order); 
 	}
+	
+	 @PostMapping("/{orderId}/items")
+	    public ResponseEntity<OrderItem> addOrderItem(@PathVariable Long orderId, 
+	                                                  @RequestParam Long productId, 
+	                                                  @RequestParam Integer quantity) {
+	        OrderItem orderItem = service.addOrderItem(orderId, productId, quantity);
+	        return ResponseEntity.ok(orderItem);
+	}
+	 
+	 @DeleteMapping("/{orderId}/items")
+	    public ResponseEntity<Void> deleteOrderItem(@PathVariable Long orderId, 
+	                                                @RequestParam Long productId) {
+	        service.deleteOrderItem(orderId, productId);
+	        return ResponseEntity.noContent().build();
+	    }
 }
