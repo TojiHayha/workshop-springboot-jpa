@@ -21,25 +21,23 @@ import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class OrderService {
-	
-	@Autowired
-	private OrderRepository repository; 
-	@Autowired
-	private OrderItemRepository repositoryI; 
-	@Autowired
-	private ProductRepository repositoryP; 
-	
 
-	
+	@Autowired
+	private OrderRepository repository;
+	@Autowired
+	private OrderItemRepository repositoryI;
+	@Autowired
+	private ProductRepository repositoryP;
+
 	public List<Order> findAll() {
 		return repository.findAll();
 	}
-	
+
 	public Order findById(Long id) {
 		Optional<Order> obj = repository.findById(id);
 		return obj.get();
 	}
-	
+
 	public Order create(Order order) {
 		return repository.save(order);
 	}
@@ -60,7 +58,7 @@ public class OrderService {
 			Order entity = repository.getReferenceById(id);
 			updateData(entity, order);
 			return repository.save(entity);
-		}catch(EntityNotFoundException e) {
+		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);
 		}
 	}
@@ -73,33 +71,28 @@ public class OrderService {
 		entity.getItems().addAll(order.getItems());
 
 	}
-	
-	  public OrderItem addOrderItem(Long orderId, Long productId, Integer quantity) {
-	        Order order = repository.findById(orderId)
-	                .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
 
-	        Product product = repositoryP.findById(productId)
-	                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+	public OrderItem addOrderItem(Long orderId, Long productId, Integer quantity) {
+		Order order = repository.findById(orderId).orElseThrow(() -> new ResourceNotFoundException("Order not found"));
 
-	        OrderItem orderItem = new OrderItem(order, product, quantity, product.getPrice());
+		Product product = repositoryP.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
-	        return repositoryI.save(orderItem);
-	    }
-	  
-	  public void deleteOrderItem(Long orderId, Long productId) {
-	        Order order = repository.findById(orderId)
-	                .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
+		OrderItem orderItem = new OrderItem(order, product, quantity, product.getPrice());
 
-	        Product product = repositoryP.findById(productId)
-	                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+		return repositoryI.save(orderItem);
+	}
 
-	        OrderItemPK pk = new OrderItemPK();
-	        pk.setOrder(order);
-	        pk.setProduct(product);
+	public void deleteOrderItem(Long orderId, Long productId) {
+		Order order = repository.findById(orderId).orElseThrow(() -> new ResourceNotFoundException("Order not found"));
 
-	        OrderItem orderItem = repositoryI.findById(pk)
-	                .orElseThrow(() -> new ResourceNotFoundException("OrderItem not found"));
+		Product product = repositoryP.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
-	        repositoryI.delete(orderItem);
-	    }
+		OrderItemPK pk = new OrderItemPK();
+		pk.setOrder(order);
+		pk.setProduct(product);
+
+		OrderItem orderItem = repositoryI.findById(pk).orElseThrow(() -> new ResourceNotFoundException("OrderItem not found"));
+
+		repositoryI.delete(orderItem);
+	}
 }
